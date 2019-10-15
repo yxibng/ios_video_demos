@@ -13,6 +13,7 @@
 @interface PixelBufferPool()
 @property (nonatomic) CFMutableDictionaryRef pools;
 @property (nonatomic) NSLock *lock;
+@property (nonatomic, strong) NSMutableDictionary *poolMaps;
 @end
 
 
@@ -42,21 +43,43 @@
 {
     if (self = [super init]) {
         _pools = CFDictionaryCreateMutable(CFAllocatorGetDefault(), 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        _poolMaps = @{}.mutableCopy;
         _lock = [[NSLock alloc] init];
     }
     return self;
 }
 
-
+//need release returned CVPixelBufferRef
 - (CVPixelBufferRef)pixelBufferWithWidth:(int)width height:(int)height pixelFormat:(PixelBufferFormat)pixelFormat
 {
-    CVPixelBufferPoolRef pixBufferPool = [self pixelBufferPoolWithWidth:width height:height pixelFormat:pixelFormat];
-    if (!pixBufferPool) {
+    OSType type;
+    switch (pixelFormat) {
+        case PixelBufferFormat_I420:
+            type = kCVPixelFormatType_420YpCbCr8PlanarFullRange;
+            break;
+        case PixelBufferFormat_BGRA:
+            type = kCVPixelFormatType_32BGRA;
+            break;
+        case PixelBufferFormat_NV12:
+            type = kCVPixelFormatType_420YpCbCr8BiPlanarFullRange;
+            break;
+    }
+    return [self createPixelBufferWithWidth:width height:height pixelFormat:type];
+}
+
+
+//need release returned CVPixelBufferRef
+- (CVPixelBufferRef)createPixelBufferWithWidth:(int)width height:(int)height pixelFormat:(OSType)pixelFormat
+{
+    //get pool
+    CVPixelBufferPoolRef pool = [self getPoolWithWidth:width height:height pixelFormat:pixelFormat];
+    if (!pool) {
         return NULL;
     }
-    //create pixel buffer
+    
+    //create pixel buffer from pool
     CVPixelBufferRef pixelBuffer = nil;
-    CVReturn status = CVPixelBufferPoolCreatePixelBuffer(kCFAllocatorDefault, pixBufferPool, &pixelBuffer);
+    CVReturn status = CVPixelBufferPoolCreatePixelBuffer(kCFAllocatorDefault, pool, &pixelBuffer);
     if (status != kCVReturnSuccess) {
         return NULL;
     }
@@ -64,52 +87,56 @@
 }
 
 
-- (CVPixelBufferPoolRef)pixelBufferPoolWithWidth:(int)width height:(int)height pixelFormat:(PixelBufferFormat)pixelFormat
+- (CVPixelBufferPoolRef)getPoolWithWidth:(int)width height:(int)height pixelFormat:(OSType)pixelFormat
 {
-    OSType type;
-    NSString *suffix;
-    switch (pixelFormat) {
-        case PixelBufferFormat_I420:
-            type = kCVPixelFormatType_420YpCbCr8PlanarFullRange;
-            suffix = @"i420";
-            break;
-        case PixelBufferFormat_BGRA:
-            type = kCVPixelFormatType_32BGRA;
-            suffix = @"bgra";
-            break;
-        case PixelBufferFormat_NV12:
-            type = kCVPixelFormatType_420YpCbCr8BiPlanarFullRange;
-            suffix = @"nv12";
-            break;
-    }
-
-    NSString *key = [NSString stringWithFormat:@"%d_%d_%@", width, height, suffix];
-
+    
+    NSString *key = [NSString stringWithFormat:@"%d_%d_%d",width,height,pixelFormat];
     [self.lock lock];
     CVPixelBufferPoolRef pool = (CVPixelBufferPoolRef)CFDictionaryGetValue(self.pools, (__bridge const void *)(key));
-    if (pool == NULL) {
-        NSDictionary *att = @{
-            (NSString *)kCVPixelBufferPixelFormatTypeKey : @(type),
-            (NSString *)kCVPixelBufferWidthKey : @(width),
-            (NSString *)kCVPixelBufferHeightKey : @(height),
-            (NSString *)kCVPixelBufferIOSurfacePropertiesKey : @{},
-        };
-
-        int status = CVPixelBufferPoolCreate(NULL, (__bridge CFDictionaryRef _Nullable)att, (__bridge CFDictionaryRef _Nullable)att, &pool);
-        if (status != kCVReturnSuccess) {
-            [self.lock unlock];
-            return NULL;
-        }
-        CFDictionarySetValue(self.pools, (__bridge const void *)(key), pool);
-        CVPixelBufferPoolRelease(pool);
+    [self.lock unlock];
+    
+    if (pool) {
+        [self flushPool:pool];
+        return pool;
     }
-    CVPixelBufferPoolFlush(pool, kCVPixelBufferPoolFlushExcessBuffers);
+    pool = [self createPixelBufferPoolWithWidth:width height:height pixelFormat:pixelFormat];
+    
+    if (!pool) {
+        return NULL;
+    }
+    [self.lock lock];
+    CFDictionarySetValue(self.pools, (__bridge const void *)(key), pool);
     [self.lock unlock];
     return pool;
 }
 
 
 
+// create pool
+- (CVPixelBufferPoolRef)createPixelBufferPoolWithWidth:(int)width height:(int)height pixelFormat:(OSType)pixelFormat
+{
+    CVPixelBufferPoolRef pool = nil;
+    NSDictionary *att = @{
+        (NSString *)kCVPixelBufferPixelFormatTypeKey : @(pixelFormat),
+        (NSString *)kCVPixelBufferWidthKey : @(width),
+        (NSString *)kCVPixelBufferHeightKey : @(height),
+        (NSString *)kCVPixelBufferIOSurfacePropertiesKey : @{},
+    };
+    
+    int status = CVPixelBufferPoolCreate(kCFAllocatorDefault, (__bridge CFDictionaryRef _Nullable)att, (__bridge CFDictionaryRef _Nullable)att, &pool);
+    if (status != kCVReturnSuccess) {
+        return NULL;
+    }
+    return (CVPixelBufferPoolRef)CFAutorelease(pool);
+}
 
+// flush pool free memory
+- (void)flushPool:(CVPixelBufferPoolRef)pool
+{
+    if (!pool) {
+        return;
+    }
+    CVPixelBufferPoolFlush(pool, kCVPixelBufferPoolFlushExcessBuffers);
+}
 
 @end

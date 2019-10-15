@@ -39,11 +39,11 @@
 //    [self showNV12:pixelBuffer];
     
     //i420
-//    [self showI420:pixelBuffer];
+    [self showI420:pixelBuffer];
     
     
     //bgra
-    [self showBGRA:pixelBuffer];
+    //[self showBGRA:pixelBuffer];
 }
 
 - (void)showNV12:(CVPixelBufferRef)pixelBuffer

@@ -112,7 +112,7 @@
                          (int)pixelWidth, (int)pixelHeight);
     
     
-    libyuv::ARGBToBGRA(<#const uint8_t *src_argb#>, <#int src_stride_argb#>, <#uint8_t *dst_bgra#>, <#int dst_stride_bgra#>, <#int width#>, <#int height#>)
+//    libyuv::ARGBToBGRA(<#const uint8_t *src_argb#>, <#int src_stride_argb#>, <#uint8_t *dst_bgra#>, <#int dst_stride_bgra#>, <#int width#>, <#int height#>)
     
     
     if (ret != 0) {
