@@ -12,7 +12,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoFormatConvertor : NSObject
+
 + (CVPixelBufferRef)convertToI420FromNv12:(CVPixelBufferRef)pixelBuffer;
+
++ (CVPixelBufferRef)convertToBGRAFromNv12:(CVPixelBufferRef)pixelBuffer;
 @end
 
 NS_ASSUME_NONNULL_END

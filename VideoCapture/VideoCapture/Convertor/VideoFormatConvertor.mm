@@ -75,6 +75,60 @@
 }
 
 
++ (CVPixelBufferRef)convertToBGRAFromNv12:(CVPixelBufferRef)pixelBuffer
+{
+    if (!pixelBuffer) {
+        return NULL;
+    }
+    CVPixelBufferRetain(pixelBuffer);
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+
+    size_t pixelWidth = CVPixelBufferGetWidth(pixelBuffer);
+    size_t pixelHeight = CVPixelBufferGetHeight(pixelBuffer);
+    uint8_t *y_frame = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    uint8_t *uv_frame = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    int src_stride_y = (int)CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    int src_stride_uv = (int)CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+
+
+    //create rgb buffer
+
+    CVPixelBufferRef rgbBuffer = [[PixelBufferPool sharedPool] pixelBufferWithWidth:(int)pixelWidth height:(int)pixelHeight pixelFormat:PixelBufferFormat_BGRA];
+    if (!rgbBuffer) {
+        //create error
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+        CVPixelBufferRelease(pixelBuffer);
+        return NULL;
+    }
+    
+    CVPixelBufferLockBaseAddress(rgbBuffer, 0);
+
+    uint8_t *rgb_data = (uint8_t *)CVPixelBufferGetBaseAddress(rgbBuffer);
+    int dst_stride = (int)CVPixelBufferGetBytesPerRow(rgbBuffer);
+    //warning why dst_stride_abgr= pixelWidth*4 ?
+    int ret = libyuv::NV12ToABGR(y_frame, src_stride_y,
+                         uv_frame, src_stride_uv,
+                         rgb_data, dst_stride,
+                         (int)pixelWidth, (int)pixelHeight);
+
+    if (ret != 0) {
+        CVPixelBufferUnlockBaseAddress(rgbBuffer, 0);
+        CVPixelBufferRelease(rgbBuffer);
+
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+        CVPixelBufferRelease(pixelBuffer);
+        return NULL;
+    }
+
+
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    CVPixelBufferRelease(pixelBuffer);
+
+    CVPixelBufferUnlockBaseAddress(rgbBuffer, 0);
+    return (CVPixelBufferRef)CFAutorelease(rgbBuffer);
+}
+
+
 
 
 @end

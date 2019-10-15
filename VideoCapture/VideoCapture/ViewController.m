@@ -39,7 +39,11 @@
 //    [self showNV12:pixelBuffer];
     
     //i420
-    [self showI420:pixelBuffer];
+//    [self showI420:pixelBuffer];
+    
+    
+    //bgra
+    [self showBGRA:pixelBuffer];
 }
 
 - (void)showNV12:(CVPixelBufferRef)pixelBuffer
@@ -69,6 +73,24 @@
     
     CVBufferRelease(pixelBuffer);
 }
+
+- (void)showBGRA:(CVPixelBufferRef)pixelBuffer
+{
+    if (!pixelBuffer) {
+        return;
+    }
+    CVPixelBufferRetain(pixelBuffer);
+    
+    CVPixelBufferRef rgbBuffer = [VideoFormatConvertor convertToBGRAFromNv12:pixelBuffer];
+    if (rgbBuffer) {
+        CVPixelBufferRetain(rgbBuffer);
+        [self.preview displayPixelBuffer:rgbBuffer];
+        CVPixelBufferRelease(rgbBuffer);
+    }
+    
+    CVBufferRelease(pixelBuffer);
+}
+
 
 
 
