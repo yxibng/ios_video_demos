@@ -110,7 +110,11 @@
                          uv_frame, src_stride_uv,
                          rgb_data, dst_stride,
                          (int)pixelWidth, (int)pixelHeight);
-
+    
+    
+    libyuv::ARGBToBGRA(<#const uint8_t *src_argb#>, <#int src_stride_argb#>, <#uint8_t *dst_bgra#>, <#int dst_stride_bgra#>, <#int width#>, <#int height#>)
+    
+    
     if (ret != 0) {
         CVPixelBufferUnlockBaseAddress(rgbBuffer, 0);
         CVPixelBufferRelease(rgbBuffer);
