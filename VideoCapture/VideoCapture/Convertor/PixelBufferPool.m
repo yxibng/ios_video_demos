@@ -55,7 +55,10 @@
     OSType type;
     switch (pixelFormat) {
         case PixelBufferFormat_I420:
-            type = kCVPixelFormatType_420YpCbCr8PlanarFullRange;
+            /*
+             kCVPixelFormatType_420YpCbCr8PlanarFullRange 在 iOS13上面有问题
+             */
+            type = kCVPixelFormatType_420YpCbCr8Planar;
             break;
         case PixelBufferFormat_BGRA:
             type = kCVPixelFormatType_32BGRA;
@@ -90,7 +93,7 @@
 - (CVPixelBufferPoolRef)getPoolWithWidth:(int)width height:(int)height pixelFormat:(OSType)pixelFormat
 {
     
-    NSString *key = [NSString stringWithFormat:@"%d_%d_%d",width,height,pixelFormat];
+    NSString *key = [NSString stringWithFormat:@"%d_%d_%u",width,height,(unsigned int)pixelFormat];
     [self.lock lock];
     CVPixelBufferPoolRef pool = (CVPixelBufferPoolRef)CFDictionaryGetValue(self.pools, (__bridge const void *)(key));
     [self.lock unlock];
