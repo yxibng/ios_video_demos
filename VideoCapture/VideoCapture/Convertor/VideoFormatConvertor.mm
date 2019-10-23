@@ -31,7 +31,7 @@
 
 
     //create rgb buffer
-    CVPixelBufferRef i420Buffer = [[PixelBufferPool sharedPool] pixelBufferWithWidth:(int)pixelWidth height:(int)pixelHeight pixelFormat:PixelBufferFormat_I420];
+    CVPixelBufferRef i420Buffer = [[PixelBufferPool sharedPool] createPixelBufferWithWidth:(int)pixelWidth height:(int)pixelHeight pixelFormat:PixelBufferFormat_I420];
     if (!i420Buffer) {
         //create error
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
@@ -92,44 +92,44 @@
 
 
     //create rgb buffer
-
-    CVPixelBufferRef rgbBuffer = [[PixelBufferPool sharedPool] pixelBufferWithWidth:(int)pixelWidth height:(int)pixelHeight pixelFormat:PixelBufferFormat_BGRA];
-    if (!rgbBuffer) {
-        //create error
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-        CVPixelBufferRelease(pixelBuffer);
-        return NULL;
-    }
-    
-    CVPixelBufferLockBaseAddress(rgbBuffer, 0);
-
-    uint8_t *rgb_data = (uint8_t *)CVPixelBufferGetBaseAddress(rgbBuffer);
-    int dst_stride = (int)CVPixelBufferGetBytesPerRow(rgbBuffer);
-    //warning why dst_stride_abgr= pixelWidth*4 ?
+    uint8_t *abgr_data = (uint8_t *)malloc(pixelWidth * pixelHeight * 4);
+    int abgr_stride = pixelWidth * 4;
     int ret = libyuv::NV12ToABGR(y_frame, src_stride_y,
                          uv_frame, src_stride_uv,
-                         rgb_data, dst_stride,
+                         abgr_data, abgr_stride,
                          (int)pixelWidth, (int)pixelHeight);
-    
-    
-//    libyuv::ARGBToBGRA(<#const uint8_t *src_argb#>, <#int src_stride_argb#>, <#uint8_t *dst_bgra#>, <#int dst_stride_bgra#>, <#int width#>, <#int height#>)
-    
-    
-    if (ret != 0) {
-        CVPixelBufferUnlockBaseAddress(rgbBuffer, 0);
-        CVPixelBufferRelease(rgbBuffer);
-
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-        CVPixelBufferRelease(pixelBuffer);
-        return NULL;
-    }
-
-
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     CVPixelBufferRelease(pixelBuffer);
+    if (ret) {
+        free(abgr_data);
+        return NULL;
+    }
+    
+    
+    CVPixelBufferRef dstBuffer = [[PixelBufferPool sharedPool] createPixelBufferWithWidth:(int)pixelWidth height:(int)pixelHeight pixelFormat:PixelBufferFormat_BGRA];
+    if (!dstBuffer) {
+        //create error
+        free(abgr_data);
+        return NULL;
+    }
+    
+    CVPixelBufferLockBaseAddress(dstBuffer, 0);
+    
 
-    CVPixelBufferUnlockBaseAddress(rgbBuffer, 0);
-    return (CVPixelBufferRef)CFAutorelease(rgbBuffer);
+    uint8_t *dst_data = (uint8_t *)CVPixelBufferGetBaseAddress(dstBuffer);
+    int dst_stride = (int)CVPixelBufferGetBytesPerRow(dstBuffer);
+    
+    ret = libyuv::ARGBToBGRA(abgr_data, abgr_stride,
+                       dst_data, dst_stride,
+                       (int)pixelWidth, (int)pixelHeight);
+    CVPixelBufferUnlockBaseAddress(dstBuffer, 0);
+    
+    if (ret != 0) {
+        free(abgr_data);
+        return NULL;
+    }
+    
+    return (CVPixelBufferRef)CFAutorelease(dstBuffer);
 }
 
 

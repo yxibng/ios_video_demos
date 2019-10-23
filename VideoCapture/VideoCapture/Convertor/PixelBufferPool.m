@@ -50,7 +50,7 @@
 }
 
 //need release returned CVPixelBufferRef
-- (CVPixelBufferRef)pixelBufferWithWidth:(int)width height:(int)height pixelFormat:(PixelBufferFormat)pixelFormat
+- (CVPixelBufferRef)createPixelBufferWithWidth:(int)width height:(int)height pixelFormat:(PixelBufferFormat)pixelFormat
 {
     OSType type;
     switch (pixelFormat) {
@@ -67,12 +67,12 @@
             type = kCVPixelFormatType_420YpCbCr8BiPlanarFullRange;
             break;
     }
-    return [self createPixelBufferWithWidth:width height:height pixelFormat:type];
+    return [self _createPixelBufferWithWidth:width height:height pixelFormat:type];
 }
 
 
 //need release returned CVPixelBufferRef
-- (CVPixelBufferRef)createPixelBufferWithWidth:(int)width height:(int)height pixelFormat:(OSType)pixelFormat
+- (CVPixelBufferRef)_createPixelBufferWithWidth:(int)width height:(int)height pixelFormat:(OSType)pixelFormat
 {
     //get pool
     CVPixelBufferPoolRef pool = [self getPoolWithWidth:width height:height pixelFormat:pixelFormat];

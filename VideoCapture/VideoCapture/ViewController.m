@@ -35,15 +35,15 @@
 
 - (void)videoRecorder:(VideoRecorder *)videoRecorder didRecievePixelBuffer:(CVPixelBufferRef)pixelBuffer
 {
-    //nv12
+//    //nv12
 //    [self showNV12:pixelBuffer];
-    
-    //i420
-    [self showI420:pixelBuffer];
+//
+//    //i420
+//    [self showI420:pixelBuffer];
     
     
     //bgra
-    //[self showBGRA:pixelBuffer];
+    [self showBGRA:pixelBuffer];
 }
 
 - (void)showNV12:(CVPixelBufferRef)pixelBuffer

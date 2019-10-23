@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, PixelBufferFormat) {
 @interface PixelBufferPool : NSObject
 + (instancetype)sharedPool;
 
-- (CVPixelBufferRef)pixelBufferWithWidth:(int)width height:(int)height pixelFormat:(PixelBufferFormat)pixelFormat;
+- (CVPixelBufferRef)createPixelBufferWithWidth:(int)width height:(int)height pixelFormat:(PixelBufferFormat)pixelFormat;
 @end
 
 NS_ASSUME_NONNULL_END
