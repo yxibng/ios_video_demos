@@ -22,7 +22,6 @@ typedef NS_ENUM(NSInteger, VideoPixelFormat) {
 @protocol VideoRecorderDelegate <NSObject>
 @optional
 - (void)videoRecorder:(VideoRecorder *)videoRecorder didStartWithSession:(AVCaptureSession *)session;
-
 - (void)videoRecorder:(VideoRecorder *)videoRecorder didRecievePixelBuffer:(CVPixelBufferRef)pixelBuffer;
 @end
 
@@ -37,7 +36,7 @@ typedef NS_ENUM(NSInteger, VideoPixelFormat) {
 
 - (instancetype)initWithPixelFormat:(VideoPixelFormat)pixelFormat
                                 fps:(int32_t)fps
-                             preset:(AVOutputSettingsPreset)preset
+                             preset:(AVCaptureSessionPreset)preset
                            delegate:(id<VideoRecorderDelegate>)delegate
                      cameraPosition:(AVCaptureDevicePosition)cameraPosition;
 

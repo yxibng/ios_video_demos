@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (CVPixelBufferRef)convertToI420FromNv12:(CVPixelBufferRef)pixelBuffer;
 
 + (CVPixelBufferRef)convertToBGRAFromNv12:(CVPixelBufferRef)pixelBuffer;
+
++ (CVPixelBufferRef)sacleI420:(CVPixelBufferRef)pixelBuffer dstWidth:(int)dstWidth dstHeight:(int)dstHeight;
 @end
 
 NS_ASSUME_NONNULL_END

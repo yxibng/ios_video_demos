@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.recorder = [[VideoRecorder alloc] initWithPixelFormat:VideoPixelFormat_YUV fps:15 preset:AVOutputSettingsPreset640x480 delegate:self cameraPosition:AVCaptureDevicePositionFront];
+    self.recorder = [[VideoRecorder alloc] initWithPixelFormat:VideoPixelFormat_YUV fps:30 preset:AVCaptureSessionPreset1280x720 delegate:self cameraPosition:AVCaptureDevicePositionFront];
     [self.recorder startRecord];
     // Do any additional setup after loading the view.
 }
@@ -37,13 +37,13 @@
 {
 //    //nv12
 //    [self showNV12:pixelBuffer];
-//
-//    //i420
-//    [self showI420:pixelBuffer];
+
+    //i420
+    [self showI420:pixelBuffer];
     
     
-    //bgra
-    [self showBGRA:pixelBuffer];
+////    bgra
+//    [self showBGRA:pixelBuffer];
 }
 
 - (void)showNV12:(CVPixelBufferRef)pixelBuffer
@@ -65,11 +65,10 @@
     CVPixelBufferRetain(pixelBuffer);
     
     CVPixelBufferRef i420Buffer = [VideoFormatConvertor convertToI420FromNv12:pixelBuffer];
-    if (i420Buffer) {
-        CVPixelBufferRetain(i420Buffer);
-        [self.preview displayPixelBuffer:i420Buffer];
-        CVPixelBufferRelease(i420Buffer);
-    }
+    
+    CVPixelBufferRef scaledBuffer = [VideoFormatConvertor sacleI420:i420Buffer dstWidth:480 dstHeight:640];
+
+    [self.preview displayPixelBuffer:scaledBuffer];
     
     CVBufferRelease(pixelBuffer);
 }
