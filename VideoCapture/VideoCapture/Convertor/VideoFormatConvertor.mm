@@ -25,6 +25,19 @@ using namespace std;
 
     size_t pixelWidth = CVPixelBufferGetWidth(pixelBuffer);
     size_t pixelHeight = CVPixelBufferGetHeight(pixelBuffer);
+    
+    int width;
+    int height;
+    if (pixelWidth >= pixelHeight) {
+        width = fmax(dstWidth, dstHeight);
+        height = fmin(dstWidth, dstHeight);
+    } else {
+        width = fmin(dstWidth, dstHeight);
+        height = fmax(dstWidth, dstHeight);
+    }
+    
+    dstWidth = width;
+    dstHeight = height;
 
     uint8_t *y_frame = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
     uint8_t *u_frame = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
@@ -76,7 +89,7 @@ using namespace std;
         
     CVPixelBufferUnlockBaseAddress(i420Buffer, 0);
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-    
+          
     return (CVPixelBufferRef)CFAutorelease(i420Buffer);
 }
 

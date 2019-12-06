@@ -45,7 +45,6 @@ typedef NS_ENUM(NSInteger, VideoPixelFormat) {
 - (void)stopRecord;
 - (void)switchCamera;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

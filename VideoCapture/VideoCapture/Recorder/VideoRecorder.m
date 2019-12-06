@@ -259,6 +259,26 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
 }
 
 
+- (void)setFps:(int32_t)fps
+{
+    _fps = fps;
+    
+    if (fps > 30) {
+        return;
+    }
+    
+    dispatch_async(self.sessionQueue, ^{
+        AVCaptureDevice *captureDevice = [self captureDeviceWitchPosition:self.currentPosition];
+        //设置帧率
+        [captureDevice lockForConfiguration:NULL];
+        [captureDevice setActiveVideoMinFrameDuration:CMTimeMake(1, self.fps)];
+        [captureDevice setActiveVideoMaxFrameDuration:CMTimeMake(1, self.fps)];
+        [captureDevice unlockForConfiguration];
+    });
+    
+}
+
+
 #pragma mark - Notification
 - (void)sessionWasInterrupted:(NSNotification *)notification
 {

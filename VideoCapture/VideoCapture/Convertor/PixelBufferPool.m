@@ -9,6 +9,7 @@
 #import "PixelBufferPool.h"
 #include <libyuv/libyuv.h>
 
+#define kCVPixelBufferPoolAllocationThreshold 30
 
 @interface PixelBufferPool()
 @property (nonatomic) CFMutableDictionaryRef pools;
@@ -80,9 +81,17 @@
         return NULL;
     }
     
-    //create pixel buffer from pool
+    //create pixel buffer
     CVPixelBufferRef pixelBuffer = nil;
-    CVReturn status = CVPixelBufferPoolCreatePixelBuffer(kCFAllocatorDefault, pool, &pixelBuffer);
+
+    NSDictionary *option = @{(NSString *)kCVPixelBufferPoolAllocationThresholdKey : @(kCVPixelBufferPoolAllocationThreshold) };
+    CVReturn status = CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(NULL, pool, (__bridge CFDictionaryRef _Nullable)(option), &pixelBuffer);
+
+    if (status == kCVReturnWouldExceedAllocationThreshold) {
+        CVPixelBufferPoolFlush(pool, kCVPixelBufferPoolFlushExcessBuffers);
+        return NULL;
+    }
+    
     if (status != kCVReturnSuccess) {
         return NULL;
     }
@@ -126,7 +135,7 @@
         (NSString *)kCVPixelBufferIOSurfacePropertiesKey : @{},
     };
     
-    int status = CVPixelBufferPoolCreate(kCFAllocatorDefault, (__bridge CFDictionaryRef _Nullable)att, (__bridge CFDictionaryRef _Nullable)att, &pool);
+    int status = CVPixelBufferPoolCreate(kCFAllocatorDefault, NULL, (__bridge CFDictionaryRef _Nullable)att, &pool);
     if (status != kCVReturnSuccess) {
         return NULL;
     }

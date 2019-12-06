@@ -69,6 +69,7 @@
 		8616D1362355BAF400639630 /* VideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D1352355BAF400639630 /* VideoPreview.m */; };
 		8616D13A2355BC0A00639630 /* VideoFormatConvertor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8616D1392355BC0A00639630 /* VideoFormatConvertor.mm */; };
 		8616D13D2355BCE600639630 /* PixelBufferPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D13C2355BCE600639630 /* PixelBufferPool.m */; };
+		8678B94B239A340800366913 /* VideoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8678B94A239A340800366913 /* VideoConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,6 +165,8 @@
 		8616D1392355BC0A00639630 /* VideoFormatConvertor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoFormatConvertor.mm; sourceTree = "<group>"; };
 		8616D13B2355BCE600639630 /* PixelBufferPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PixelBufferPool.h; sourceTree = "<group>"; };
 		8616D13C2355BCE600639630 /* PixelBufferPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PixelBufferPool.m; sourceTree = "<group>"; };
+		8678B949239A340800366913 /* VideoConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoConfig.h; sourceTree = "<group>"; };
+		8678B94A239A340800366913 /* VideoConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +310,8 @@
 			children = (
 				8616D1302355B27800639630 /* VideoRecorder.h */,
 				8616D1312355B27800639630 /* VideoRecorder.m */,
+				8678B949239A340800366913 /* VideoConfig.h */,
+				8678B94A239A340800366913 /* VideoConfig.m */,
 			);
 			path = Recorder;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				8616D0FF2355B1F600639630 /* rotate.cc in Sources */,
 				8616D1362355BAF400639630 /* VideoPreview.m in Sources */,
 				8616D1152355B1F600639630 /* rotate_gcc.cc in Sources */,
+				8678B94B239A340800366913 /* VideoConfig.m in Sources */,
 				8616D11D2355B1F600639630 /* compare_neon.cc in Sources */,
 				8616D1082355B1F600639630 /* rotate_neon64.cc in Sources */,
 				8616D11B2355B1F600639630 /* row_any.cc in Sources */,
