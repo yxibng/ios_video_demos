@@ -42,11 +42,11 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
 {
     if (self = [super init]) {
         
-        self.pixelFormat = pixelFormat;
-        self.fps = fps;
-        self.preset = preset;
-        self.delegate = delegate;
-        self.currentPosition = cameraPosition;
+        _pixelFormat = pixelFormat;
+        _fps = fps;
+        _preset = preset;
+        _delegate = delegate;
+        _currentPosition = cameraPosition;
         
         [self setup];
     }
