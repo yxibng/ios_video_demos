@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86009BCE240E0B6800002207 /* ShaderUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 86009BC9240E0B6800002207 /* ShaderUtilities.c */; };
+		86009BCF240E0B6800002207 /* DBYOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86009BCB240E0B6800002207 /* DBYOpenGLView.m */; };
+		86009BD0240E0B6800002207 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 86009BCC240E0B6800002207 /* matrix.c */; };
+		86009BD3240E0E9600002207 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86009BD2240E0E9600002207 /* OpenGLES.framework */; };
 		8616D09B2355AE4200639630 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D09A2355AE4200639630 /* AppDelegate.m */; };
 		8616D09E2355AE4200639630 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D09D2355AE4200639630 /* SceneDelegate.m */; };
 		8616D0A12355AE4200639630 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D0A02355AE4200639630 /* ViewController.m */; };
@@ -73,6 +77,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86009BC8240E0B6800002207 /* DBYOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBYOpenGLView.h; sourceTree = "<group>"; };
+		86009BC9240E0B6800002207 /* ShaderUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ShaderUtilities.c; sourceTree = "<group>"; };
+		86009BCA240E0B6800002207 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		86009BCB240E0B6800002207 /* DBYOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBYOpenGLView.m; sourceTree = "<group>"; };
+		86009BCC240E0B6800002207 /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
+		86009BCD240E0B6800002207 /* ShaderUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderUtilities.h; sourceTree = "<group>"; };
+		86009BD2240E0E9600002207 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8616D0962355AE4200639630 /* VideoCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8616D0992355AE4200639630 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8616D09A2355AE4200639630 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -174,17 +185,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86009BD3240E0E9600002207 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86009BC7240E0B6800002207 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				86009BC8240E0B6800002207 /* DBYOpenGLView.h */,
+				86009BCB240E0B6800002207 /* DBYOpenGLView.m */,
+				86009BCC240E0B6800002207 /* matrix.c */,
+				86009BCA240E0B6800002207 /* matrix.h */,
+				86009BC9240E0B6800002207 /* ShaderUtilities.c */,
+				86009BCD240E0B6800002207 /* ShaderUtilities.h */,
+			);
+			path = OpenGL;
+			sourceTree = "<group>";
+		};
+		86009BD1240E0E9600002207 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86009BD2240E0E9600002207 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8616D08D2355AE4200639630 = {
 			isa = PBXGroup;
 			children = (
 				8616D0982355AE4200639630 /* VideoCapture */,
 				8616D0972355AE4200639630 /* Products */,
+				86009BD1240E0E9600002207 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,6 +233,7 @@
 		8616D0982355AE4200639630 /* VideoCapture */ = {
 			isa = PBXGroup;
 			children = (
+				86009BC7240E0B6800002207 /* OpenGL */,
 				8616D1372355BBDE00639630 /* Convertor */,
 				8616D1332355BAE200639630 /* Preview */,
 				8616D12F2355B25700639630 /* Recorder */,
@@ -414,6 +449,7 @@
 				8616D1162355B1F600639630 /* convert.cc in Sources */,
 				8616D1292355B1F600639630 /* convert_to_i420.cc in Sources */,
 				8616D0A12355AE4200639630 /* ViewController.m in Sources */,
+				86009BCE240E0B6800002207 /* ShaderUtilities.c in Sources */,
 				8616D1122355B1F600639630 /* scale_mips.cc in Sources */,
 				8616D13A2355BC0A00639630 /* VideoFormatConvertor.mm in Sources */,
 				8616D1202355B1F600639630 /* scale_neon64.cc in Sources */,
@@ -454,6 +490,8 @@
 				8616D12B2355B1F600639630 /* rotate_argb.cc in Sources */,
 				8616D1142355B1F600639630 /* scale_any.cc in Sources */,
 				8616D1252355B1F600639630 /* scale_neon.cc in Sources */,
+				86009BCF240E0B6800002207 /* DBYOpenGLView.m in Sources */,
+				86009BD0240E0B6800002207 /* matrix.c in Sources */,
 				8616D09E2355AE4200639630 /* SceneDelegate.m in Sources */,
 				8616D1042355B1F600639630 /* cpu_id.cc in Sources */,
 				8616D1032355B1F600639630 /* compare_win.cc in Sources */,
@@ -609,6 +647,7 @@
 				DEVELOPMENT_TEAM = VB8MVMJBU4;
 				HEADER_SEARCH_PATHS = $SRCROOT/VideoCapture/libyuv;
 				INFOPLIST_FILE = VideoCapture/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -627,6 +666,7 @@
 				DEVELOPMENT_TEAM = VB8MVMJBU4;
 				HEADER_SEARCH_PATHS = $SRCROOT/VideoCapture/libyuv;
 				INFOPLIST_FILE = VideoCapture/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

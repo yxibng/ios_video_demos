@@ -7,11 +7,14 @@
 //
 
 #import "VideoPreview.h"
-@interface VideoPreview()
+
+
+@interface VideoPreview ()
 
 @property (nonatomic, strong) AVSampleBufferDisplayLayer *displayLayer;
 
 @end
+
 
 @implementation VideoPreview
 
@@ -31,6 +34,8 @@
         return;
     }
 
+    CVPixelBufferRetain(pixelBuffer);
+
     //不设置具体时间信息
     CMSampleTimingInfo timing = {kCMTimeInvalid, kCMTimeInvalid, kCMTimeInvalid};
     //获取视频信息
@@ -38,13 +43,17 @@
     OSStatus result = CMVideoFormatDescriptionCreateForImageBuffer(NULL, pixelBuffer, &videoInfo);
     NSParameterAssert(result == 0 && videoInfo != NULL);
     if (result != 0) {
+        CVPixelBufferRelease(pixelBuffer);
         return;
     }
 
     CMSampleBufferRef sampleBuffer = NULL;
     result = CMSampleBufferCreateForImageBuffer(kCFAllocatorDefault, pixelBuffer, true, NULL, NULL, videoInfo, &timing, &sampleBuffer);
-    NSParameterAssert(result == 0 && sampleBuffer != NULL);
+
+    CVPixelBufferRelease(pixelBuffer);
     CFRelease(videoInfo);
+
+    NSParameterAssert(result == 0 && sampleBuffer != NULL);
     if (result != 0) {
         return;
     }
@@ -74,7 +83,6 @@
         CFRelease(sampleBuffer);
     });
 }
-
 
 
 @end

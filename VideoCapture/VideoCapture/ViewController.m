@@ -10,19 +10,34 @@
 #import "VideoPreview.h"
 #import "VideoFormatConvertor.h"
 #import "VideoRecorder.h"
+#import "DBYOpenGLView.h"
 
-@interface ViewController ()<VideoRecorderDelegate>
+
+@interface ViewController () <VideoRecorderDelegate>
 @property (weak, nonatomic) IBOutlet VideoPreview *preview;
 @property (nonatomic, strong) VideoRecorder *recorder;
+@property (weak, nonatomic) IBOutlet DBYOpenGLView *openglView;
+
+@property (nonatomic, assign) VideoPixelFormat pixelFormat;
+
 
 @end
 
+
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    self.recorder = [[VideoRecorder alloc] initWithPixelFormat:VideoPixelFormat_YUV fps:30 preset:AVCaptureSessionPreset1280x720 delegate:self cameraPosition:AVCaptureDevicePositionFront];
+
+    _pixelFormat = VideoPixelFormat_BGRA;
+
+    self.recorder = [[VideoRecorder alloc] initWithPixelFormat:_pixelFormat
+                                                           fps:30
+                                                        preset:AVCaptureSessionPreset1280x720
+                                                      delegate:self
+                                                cameraPosition:AVCaptureDevicePositionFront];
+
     [self.recorder startRecord];
     // Do any additional setup after loading the view.
 }
@@ -30,68 +45,35 @@
 
 - (void)videoRecorder:(VideoRecorder *)videoRecorder didStartWithSession:(AVCaptureSession *)session
 {
-    
 }
 
 - (void)videoRecorder:(VideoRecorder *)videoRecorder didRecievePixelBuffer:(CVPixelBufferRef)pixelBuffer
 {
-//    //nv12
-//    [self showNV12:pixelBuffer];
-
-    //i420
-    [self showI420:pixelBuffer];
-    
-    
-////    bgra
-//    [self showBGRA:pixelBuffer];
+    [self displayAsI420With:pixelBuffer pixelBufferType:_pixelFormat];
 }
 
-- (void)showNV12:(CVPixelBufferRef)pixelBuffer
+- (void)displayAsI420With:(CVPixelBufferRef)pixelBuffer pixelBufferType:(VideoPixelFormat)format
 {
-    if (!pixelBuffer) {
-        return;
+    if (format == VideoPixelFormat_YUV) {
+        // source is nv12
+        CVPixelBufferRef dstBuffer;
+        int ret = [VideoFormatConvertor convertToI420PixelBuffer:&dstBuffer nv12PixelBuffer:pixelBuffer];
+        if (ret != 0) {
+            return;
+        }
+        [self.preview displayPixelBuffer:dstBuffer];
+        CVPixelBufferRelease(dstBuffer);
+
+    } else {
+        // source is rgba
+        CVPixelBufferRef dstBuffer;
+        int ret = [VideoFormatConvertor convertToI420PixelBuffer:&dstBuffer rgbaPixelBuffer:pixelBuffer];
+        if (ret != 0) {
+            return;
+        }
+        [self.preview displayPixelBuffer:dstBuffer];
+        CVPixelBufferRelease(dstBuffer);
     }
-    
-    CVPixelBufferRetain(pixelBuffer);
-    [self.preview displayPixelBuffer:pixelBuffer];
-    CVBufferRelease(pixelBuffer);
 }
-
-- (void)showI420:(CVPixelBufferRef)pixelBuffer
-{
-    if (!pixelBuffer) {
-        return;
-    }
-    CVPixelBufferRetain(pixelBuffer);
-    
-    CVPixelBufferRef i420Buffer = [VideoFormatConvertor convertToI420FromNv12:pixelBuffer];
-    
-    CVPixelBufferRef scaledBuffer = [VideoFormatConvertor sacleI420:i420Buffer dstWidth:480 dstHeight:640];
-
-    [self.preview displayPixelBuffer:scaledBuffer];
-    
-    CVBufferRelease(pixelBuffer);
-}
-
-- (void)showBGRA:(CVPixelBufferRef)pixelBuffer
-{
-    if (!pixelBuffer) {
-        return;
-    }
-    CVPixelBufferRetain(pixelBuffer);
-    
-    CVPixelBufferRef rgbBuffer = [VideoFormatConvertor convertToBGRAFromNv12:pixelBuffer];
-    if (rgbBuffer) {
-        CVPixelBufferRetain(rgbBuffer);
-        [self.preview displayPixelBuffer:rgbBuffer];
-        CVPixelBufferRelease(rgbBuffer);
-    }
-    
-    CVBufferRelease(pixelBuffer);
-}
-
-
-
-
 
 @end
