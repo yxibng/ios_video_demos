@@ -74,7 +74,7 @@ using namespace std;
                                     i420_u, dst_stride_u,
                                     i420_v, dst_stride_v,
                                     pixelWidth, pixelHeight);
-    NSLog(@"convertToI420Raw from nv12 pixelBuffer, error code = %d", result);
+
     assert(result == 0);
 
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
@@ -84,6 +84,8 @@ using namespace std;
         free(i420_y);
         free(i420_u);
         free(i420_v);
+
+        NSLog(@"convertToI420Raw from nv12 pixelBuffer, error code = %d", result);
         return result;
     }
 
@@ -133,7 +135,7 @@ using namespace std;
                                     pixelWidth, pixelHeight);
 
     assert(result == 0);
-    NSLog(@"convertToI420Raw from rgba pixelBuffer, error code = %d", result);
+
 
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     CVPixelBufferRelease(pixelBuffer);
@@ -142,6 +144,8 @@ using namespace std;
         free(i420_y);
         free(i420_u);
         free(i420_v);
+
+        NSLog(@"convertToI420Raw from rgba pixelBuffer, error code = %d", result);
 
         return result;
     }
@@ -233,6 +237,68 @@ using namespace std;
     *i420Buffer = dstPixelBuffer;
     return result;
 }
+
++ (int)convertToI420PixelBuffer:(CVPixelBufferRef *)i420Buffer nv12PixelBuffer:(CVPixelBufferRef)pixelBuffer mirrored:(BOOL)mirrored
+{
+    if (!mirrored) {
+        return [self convertToI420PixelBuffer:i420Buffer nv12PixelBuffer:pixelBuffer];
+    }
+
+    RawData_i420 middleData;
+
+    int ret = [self convertToI420Raw:&middleData nv12PixelBuffer:pixelBuffer];
+    if (ret != 0) {
+        return ret;
+    }
+
+    PixelBufferPoolDesc poolDesc = {0};
+    poolDesc.width = middleData.width;
+    poolDesc.height = middleData.height;
+    poolDesc.format = PixelBufferFormat_I420;
+
+    PixelBufferDesc desc = {
+        .poolDesc = poolDesc,
+        .threshold = kPixelBufferPoolThreshold};
+
+    CVPixelBufferRef dstPixelBuffer = [[PixelBufferPool sharedPool] createPixelBufferFromPoolWithDesc:desc];
+    if (!dstPixelBuffer) {
+        [VideoFormatConvertor freeRawI420:&middleData];
+        return -1;
+    }
+
+    CVPixelBufferLockBaseAddress(dstPixelBuffer, 0);
+    //kCVPixelFormatType_420YpCbCr8Planar 是三平面
+    int dst_stride_y = (int)CVPixelBufferGetBytesPerRowOfPlane(dstPixelBuffer, 0);
+    int dst_stride_u = (int)CVPixelBufferGetBytesPerRowOfPlane(dstPixelBuffer, 1);
+    int dst_stride_v = (int)CVPixelBufferGetBytesPerRowOfPlane(dstPixelBuffer, 2);
+
+    uint8_t *i420_y = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(dstPixelBuffer, 0);
+    uint8_t *i420_u = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(dstPixelBuffer, 1);
+    uint8_t *i420_v = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(dstPixelBuffer, 2);
+
+
+    int result = libyuv::I420Mirror(middleData.y_frame, middleData.stride_y,
+                                    middleData.u_frame, middleData.stride_u,
+                                    middleData.v_frame, middleData.stride_v,
+                                    i420_y, dst_stride_y,
+                                    i420_u, dst_stride_u,
+                                    i420_v, dst_stride_v,
+                                    middleData.width, middleData.height);
+
+    CVPixelBufferUnlockBaseAddress(dstPixelBuffer, 0);
+
+    if (result != 0) {
+        CVPixelBufferRelease(dstPixelBuffer);
+        [VideoFormatConvertor freeRawI420:&middleData];
+        return result;
+    }
+
+    [VideoFormatConvertor freeRawI420:&middleData];
+    *i420Buffer = dstPixelBuffer;
+
+    return 0;
+}
+
 
 + (int)convertToI420PixelBuffer:(CVPixelBufferRef *)i420Buffer rgbaPixelBuffer:(CVPixelBufferRef)pixelBuffer
 {

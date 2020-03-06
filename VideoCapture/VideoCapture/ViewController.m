@@ -21,16 +21,25 @@
 @property (nonatomic, assign) VideoPixelFormat pixelFormat;
 
 
+@property (nonatomic, assign) BOOL mirrored;
+
 @end
 
 
 @implementation ViewController
+- (IBAction)onChangeMirrored:(UISwitch *)sender
+{
+    self.mirrored = sender.isOn;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    _pixelFormat = VideoPixelFormat_BGRA;
+    self.mirrored = YES;
+
+
+    _pixelFormat = VideoPixelFormat_YUV;
 
     self.recorder = [[VideoRecorder alloc] initWithPixelFormat:_pixelFormat
                                                            fps:30
@@ -57,7 +66,7 @@
     if (format == VideoPixelFormat_YUV) {
         // source is nv12
         CVPixelBufferRef dstBuffer;
-        int ret = [VideoFormatConvertor convertToI420PixelBuffer:&dstBuffer nv12PixelBuffer:pixelBuffer];
+        int ret = [VideoFormatConvertor convertToI420PixelBuffer:&dstBuffer nv12PixelBuffer:pixelBuffer mirrored:self.mirrored];
         if (ret != 0) {
             return;
         }

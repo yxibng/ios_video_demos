@@ -647,7 +647,7 @@
 				DEVELOPMENT_TEAM = VB8MVMJBU4;
 				HEADER_SEARCH_PATHS = $SRCROOT/VideoCapture/libyuv;
 				INFOPLIST_FILE = VideoCapture/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -666,7 +666,7 @@
 				DEVELOPMENT_TEAM = VB8MVMJBU4;
 				HEADER_SEARCH_PATHS = $SRCROOT/VideoCapture/libyuv;
 				INFOPLIST_FILE = VideoCapture/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

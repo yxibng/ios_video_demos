@@ -25,8 +25,33 @@
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZvJ-ye-Ntd" customClass="DBYOpenGLView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mirror" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Fv-9ur">
+                                        <rect key="frame" x="77" y="126" width="46.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="kTC-Fv-9ur" firstAttribute="top" secondItem="ZvJ-ye-Ntd" secondAttribute="top" constant="126" id="FPC-fI-kQP"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kTC-Fv-9ur" secondAttribute="trailing" constant="20" symbolic="YES" id="Re4-fS-FGR"/>
+                                    <constraint firstItem="kTC-Fv-9ur" firstAttribute="leading" secondItem="ZvJ-ye-Ntd" secondAttribute="leading" constant="77" id="ikq-OF-HnP"/>
+                                </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DMQ-Vb-HQq">
+                                <rect key="frame" x="20" y="144" width="88.5" height="71"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Vhl-Z6-xOs">
+                                        <rect key="frame" x="0.0" y="20" width="90.5" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="onChangeMirrored:" destination="BYZ-38-t0r" eventType="valueChanged" id="s00-Qe-VvB"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -35,6 +60,8 @@
                             <constraint firstAttribute="trailing" secondItem="bVx-0x-ByG" secondAttribute="trailing" id="OPS-Fg-Q1G"/>
                             <constraint firstItem="vaT-Fx-5Lr" firstAttribute="top" secondItem="bVx-0x-ByG" secondAttribute="bottom" id="SKd-oG-af2"/>
                             <constraint firstItem="ZvJ-ye-Ntd" firstAttribute="top" secondItem="s4z-dl-ksF" secondAttribute="bottom" id="V9k-Bh-tkB"/>
+                            <constraint firstItem="DMQ-Vb-HQq" firstAttribute="top" secondItem="s4z-dl-ksF" secondAttribute="bottom" constant="100" id="aH9-YM-ZsZ"/>
+                            <constraint firstItem="DMQ-Vb-HQq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="aML-IZ-qtS"/>
                             <constraint firstItem="ZvJ-ye-Ntd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="i1S-Ul-Bh4"/>
                             <constraint firstItem="bVx-0x-ByG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tF9-6h-x3h"/>
                             <constraint firstAttribute="trailing" secondItem="ZvJ-ye-Ntd" secondAttribute="trailing" id="whk-9Q-sXn"/>

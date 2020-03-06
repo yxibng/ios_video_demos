@@ -67,6 +67,15 @@ typedef struct {
 /// @return 0 成功, 其他失败
 + (int)convertToI420PixelBuffer:(CVPixelBufferRef *)i420Buffer nv12PixelBuffer:(CVPixelBufferRef)pixelBuffer;
 
+
+/// nv12 to i420 pixel buffer
+/// @param i420Buffer 转换结果, 需要调用CVPixelBufferRelease进行释放
+/// @param pixelBuffer 源pixelBuffer, nv12 类型
+/// @param mirrored 是否是镜像模式
+/// @return 0 成功, 其他失败
++ (int)convertToI420PixelBuffer:(CVPixelBufferRef *)i420Buffer nv12PixelBuffer:(CVPixelBufferRef)pixelBuffer mirrored:(BOOL)mirrored;
+
+
 /// rgba to i420 pixel buffer
 /// @param i420Buffer 转换结果, 需要调用CVPixelBufferRelease进行释放
 /// @param pixelBuffer 源pixelBuffer, rgba 类型
