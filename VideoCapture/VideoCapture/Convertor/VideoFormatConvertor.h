@@ -97,22 +97,11 @@ typedef struct {
 + (int)rotateI420PixelBuffer:(CVPixelBufferRef)pixelBuffer dstPixelBuffer:(CVPixelBufferRef *)dstPixelBuffer rotationType:(RotaitonType)rotationType;
 
 
+/*
+ 实现对 i420 的裁切和缩放.
+ 截取中间的一块.
+ */
 + (CVPixelBufferRef)sacleI420:(CVPixelBufferRef)pixelBuffer dstWidth:(int)dstWidth dstHeight:(int)dstHeight;
-
-
-//+ (void)convertToI420Buffer:(I420RawData *)i420Buffer nv12PixelBuffer:(CVPixelBufferRef)pixelBuffer;
-//+ (void)convertToI420Buffer:(I420RawData *)i420Buffer bgraPixelBuffer:(CVPixelBufferRef)pixelBuffer;
-//
-//+ (CVPixelBufferRef)convertToNV12PixelBufferWithI420Buffer:(I420Buffer)i420Buffer;
-//+ (CVPixelBufferRef)convertToBGRAPixelBufferWithI420Buffer:(I420Buffer)i420Buffer;
-//
-//+ (CVPixelBufferRef)convertToI420FromNv12:(CVPixelBufferRef)pixelBuffer;
-//
-//+ (CVPixelBufferRef)convertToBGRAFromNv12:(CVPixelBufferRef)pixelBuffer;
-//
-//
-//
-//+(CVPixelBufferRef)convertToNv12FromI420:(CVPixelBufferRef)pixelBuffer;
 
 @end
 
