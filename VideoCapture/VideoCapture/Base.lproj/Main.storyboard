@@ -52,16 +52,43 @@
                                     </switch>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-U5-vg8">
+                                <rect key="frame" x="20" y="225" width="135" height="22"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旋转90度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmx-b5-mbl">
+                                        <rect key="frame" x="0.0" y="0.0" width="73" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1V-PR-KsY">
+                                        <rect key="frame" x="83" y="0.0" width="21" height="22"/>
+                                        <state key="normal" image="arrowshape.turn.up.left" catalog="system"/>
+                                        <connections>
+                                            <action selector="rotateToLeft:" destination="BYZ-38-t0r" eventType="touchUpInside" id="leR-on-ea1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZn-L5-Bzh">
+                                        <rect key="frame" x="114" y="0.0" width="21" height="22"/>
+                                        <state key="normal" image="arrowshape.turn.up.right" catalog="system"/>
+                                        <connections>
+                                            <action selector="rotateToRight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PA2-Ee-RTc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vaT-Fx-5Lr" firstAttribute="top" secondItem="ZvJ-ye-Ntd" secondAttribute="bottom" id="AI1-Up-A2G"/>
+                            <constraint firstItem="Uh7-U5-vg8" firstAttribute="leading" secondItem="DMQ-Vb-HQq" secondAttribute="leading" id="M4r-h2-p3E"/>
                             <constraint firstItem="bVx-0x-ByG" firstAttribute="top" secondItem="s4z-dl-ksF" secondAttribute="bottom" id="MBW-w7-typ"/>
                             <constraint firstAttribute="trailing" secondItem="bVx-0x-ByG" secondAttribute="trailing" id="OPS-Fg-Q1G"/>
                             <constraint firstItem="vaT-Fx-5Lr" firstAttribute="top" secondItem="bVx-0x-ByG" secondAttribute="bottom" id="SKd-oG-af2"/>
                             <constraint firstItem="ZvJ-ye-Ntd" firstAttribute="top" secondItem="s4z-dl-ksF" secondAttribute="bottom" id="V9k-Bh-tkB"/>
                             <constraint firstItem="DMQ-Vb-HQq" firstAttribute="top" secondItem="s4z-dl-ksF" secondAttribute="bottom" constant="100" id="aH9-YM-ZsZ"/>
                             <constraint firstItem="DMQ-Vb-HQq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="aML-IZ-qtS"/>
+                            <constraint firstItem="Uh7-U5-vg8" firstAttribute="top" secondItem="DMQ-Vb-HQq" secondAttribute="bottom" constant="10" id="fuo-7R-Uvg"/>
                             <constraint firstItem="ZvJ-ye-Ntd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="i1S-Ul-Bh4"/>
                             <constraint firstItem="bVx-0x-ByG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tF9-6h-x3h"/>
                             <constraint firstAttribute="trailing" secondItem="ZvJ-ye-Ntd" secondAttribute="trailing" id="whk-9Q-sXn"/>
@@ -77,4 +104,8 @@
             <point key="canvasLocation" x="132" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrowshape.turn.up.left" catalog="system" width="64" height="52"/>
+        <image name="arrowshape.turn.up.right" catalog="system" width="64" height="52"/>
+    </resources>
 </document>

@@ -23,6 +23,9 @@
 
 @property (nonatomic, assign) BOOL mirrored;
 
+@property (nonatomic, assign) RotaitonType rotationType;
+
+
 @end
 
 
@@ -38,6 +41,7 @@
 
     self.mirrored = YES;
 
+    self.rotationType = Rotate0;
 
     _pixelFormat = VideoPixelFormat_YUV;
 
@@ -50,7 +54,17 @@
     [self.recorder startRecord];
     // Do any additional setup after loading the view.
 }
+- (IBAction)rotateToLeft:(id)sender
+{
+    int degree = ((int)self.rotationType - 90 + 360) % 360;
+    self.rotationType = (RotaitonType)degree;
+}
 
+- (IBAction)rotateToRight:(id)sender
+{
+    int degree = ((int)self.rotationType + 90) % 360;
+    self.rotationType = (RotaitonType)degree;
+}
 
 - (void)videoRecorder:(VideoRecorder *)videoRecorder didStartWithSession:(AVCaptureSession *)session
 {
@@ -70,8 +84,15 @@
         if (ret != 0) {
             return;
         }
-        [self.preview displayPixelBuffer:dstBuffer];
+
+        CVPixelBufferRef rotationBuffer;
+        ret = [VideoFormatConvertor rotateI420PixelBuffer:dstBuffer dstPixelBuffer:&rotationBuffer rotationType:self.rotationType];
         CVPixelBufferRelease(dstBuffer);
+        if (ret != 0) {
+            return;
+        }
+        [self.preview displayPixelBuffer:rotationBuffer];
+        CVPixelBufferRelease(rotationBuffer);
 
     } else {
         // source is rgba

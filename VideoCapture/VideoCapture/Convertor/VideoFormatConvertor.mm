@@ -299,6 +299,81 @@ using namespace std;
     return 0;
 }
 
++ (int)rotateI420PixelBuffer:(CVPixelBufferRef)pixelBuffer dstPixelBuffer:(CVPixelBufferRef *)dstPixelBuffer rotationType:(RotaitonType)rotationType
+{
+    if (!pixelBuffer || !dstPixelBuffer) {
+        return -1;
+    }
+
+
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+
+    int src_width = (int)CVPixelBufferGetWidth(pixelBuffer);
+    int src_height = (int)CVPixelBufferGetHeight(pixelBuffer);
+
+    int src_stride_y = (int)CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    int src_stride_u = (int)CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    int src_stride_v = (int)CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 2);
+
+    uint8_t *src_y = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    uint8_t *src_u = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    uint8_t *src_v = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 2);
+
+
+    //确定旋转后的宽高
+    int dstWidth = (rotationType == Rotate0 || rotationType == Rotate180) ? src_width : src_height;
+    int dstHeight = (rotationType == Rotate0 || rotationType == Rotate180) ? src_height : src_width;
+
+
+    PixelBufferPoolDesc poolDesc = {
+        .width = dstWidth,
+        .height = dstHeight,
+        .format = PixelBufferFormat_I420};
+
+    PixelBufferDesc desc = {
+        .poolDesc = poolDesc,
+        .threshold = kPixelBufferPoolThreshold};
+
+    CVPixelBufferRef i420Buffer = [[PixelBufferPool sharedPool] createPixelBufferFromPoolWithDesc:desc];
+    assert(i420Buffer != NULL);
+    if (!i420Buffer) {
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+        return -1;
+    }
+
+    CVPixelBufferLockBaseAddress(i420Buffer, 0);
+
+    int dst_stride_y = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 0);
+    int dst_stride_u = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 1);
+    int dst_stride_v = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 2);
+
+    uint8_t *dst_y = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(i420Buffer, 0);
+    uint8_t *dst_u = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(i420Buffer, 1);
+    uint8_t *dst_v = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(i420Buffer, 2);
+
+    libyuv::RotationMode mode = (libyuv::RotationMode)rotationType;
+    //i420 copy
+    int result = libyuv::I420Rotate(src_y, src_stride_y,
+                                    src_u, src_stride_u,
+                                    src_v, src_stride_v,
+                                    dst_y, dst_stride_y,
+                                    dst_u, dst_stride_u,
+                                    dst_v, dst_stride_v,
+                                    src_width, src_height,
+                                    mode);
+
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+
+    if (result != 0) {
+        CVPixelBufferUnlockBaseAddress(i420Buffer, 0);
+        CVPixelBufferRelease(i420Buffer);
+        return result;
+    }
+
+    *dstPixelBuffer = i420Buffer;
+    return result;
+}
+
 
 + (int)convertToI420PixelBuffer:(CVPixelBufferRef *)i420Buffer rgbaPixelBuffer:(CVPixelBufferRef)pixelBuffer
 {

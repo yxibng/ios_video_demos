@@ -11,6 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, RotaitonType) {
+    Rotate0 = 0,     // No rotation.
+    Rotate90 = 90,   // Rotate 90 degrees clockwise.
+    Rotate180 = 180, // Rotate 180 degrees.
+    Rotate270 = 270, // Rotate 270 degrees clockwise.,
+};
+
 typedef struct {
     uint8_t *y_frame;
     uint8_t *u_frame;
@@ -81,6 +88,13 @@ typedef struct {
 /// @param pixelBuffer 源pixelBuffer, rgba 类型
 /// @return 0 成功, 其他失败
 + (int)convertToI420PixelBuffer:(CVPixelBufferRef *)i420Buffer rgbaPixelBuffer:(CVPixelBufferRef)pixelBuffer;
+
+
+///  旋转i420
+/// @param pixelBuffer 待旋转的pixel buffer
+/// @param dstPixelBuffer 旋转后的pixel buffer, 需要调用CVPixelBufferRelease进行释放
+/// @param rotationType  0, 90, 180, 270
++ (int)rotateI420PixelBuffer:(CVPixelBufferRef)pixelBuffer dstPixelBuffer:(CVPixelBufferRef *)dstPixelBuffer rotationType:(RotaitonType)rotationType;
 
 
 + (CVPixelBufferRef)sacleI420:(CVPixelBufferRef)pixelBuffer dstWidth:(int)dstWidth dstHeight:(int)dstHeight;
