@@ -7,3 +7,4 @@
 	- i420 copy
 	- i420 mirror
 	- i420 rotation
+	- i420 scale
