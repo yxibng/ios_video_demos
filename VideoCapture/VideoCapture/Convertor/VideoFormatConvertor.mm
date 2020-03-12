@@ -219,20 +219,15 @@ using namespace std;
                                     i420_v, dst_stride_v,
                                     (int)pixelWidth, (int)pixelHeight);
 
-    if (result != 0) {
-        CVPixelBufferUnlockBaseAddress(dstPixelBuffer, 0);
-        CVPixelBufferRelease(dstPixelBuffer);
-
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-        CVPixelBufferRelease(pixelBuffer);
-
-        return result;
-    }
-
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     CVPixelBufferRelease(pixelBuffer);
 
     CVPixelBufferUnlockBaseAddress(dstPixelBuffer, 0);
+
+    if (result != 0) {
+        CVPixelBufferRelease(dstPixelBuffer);
+        return result;
+    }
 
     *i420Buffer = dstPixelBuffer;
     return result;
@@ -488,7 +483,7 @@ using namespace std;
 
     int dst_stride_y = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 0);
     int dst_stride_u = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 1);
-    int dst_stride_v = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 1);
+    int dst_stride_v = (int)CVPixelBufferGetBytesPerRowOfPlane(i420Buffer, 2);
 
 
     int cropped_src_width = fmin(pixelWidth, dstWidth * pixelHeight / dstHeight);
