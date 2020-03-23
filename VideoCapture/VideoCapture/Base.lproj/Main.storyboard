@@ -25,31 +25,24 @@
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZvJ-ye-Ntd" customClass="DBYOpenGLView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mirror" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Fv-9ur">
-                                        <rect key="frame" x="77" y="126" width="46.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstItem="kTC-Fv-9ur" firstAttribute="top" secondItem="ZvJ-ye-Ntd" secondAttribute="top" constant="126" id="FPC-fI-kQP"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kTC-Fv-9ur" secondAttribute="trailing" constant="20" symbolic="YES" id="Re4-fS-FGR"/>
-                                    <constraint firstItem="kTC-Fv-9ur" firstAttribute="leading" secondItem="ZvJ-ye-Ntd" secondAttribute="leading" constant="77" id="ikq-OF-HnP"/>
-                                </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DMQ-Vb-HQq">
-                                <rect key="frame" x="20" y="144" width="88.5" height="71"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DMQ-Vb-HQq">
+                                <rect key="frame" x="20" y="144" width="89" height="71"/>
                                 <subviews>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Vhl-Z6-xOs">
-                                        <rect key="frame" x="0.0" y="20" width="90.5" height="31"/>
+                                        <rect key="frame" x="0.0" y="20" width="39.5" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="onChangeMirrored:" destination="BYZ-38-t0r" eventType="valueChanged" id="s00-Qe-VvB"/>
                                         </connections>
                                     </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mirror" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Fv-9ur">
+                                        <rect key="frame" x="42.5" y="25.5" width="46.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-U5-vg8">
