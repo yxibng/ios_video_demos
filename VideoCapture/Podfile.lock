@@ -1,0 +1,47 @@
+PODS:
+  - DbyPaas_iOS (0.1.0):
+    - DbyPaas_iOS/duobei (= 0.1.0)
+  - DbyPaas_iOS/curl (0.1.0)
+  - DbyPaas_iOS/DBAVSync (0.1.0):
+    - DbyPaas_iOS/webrtc_3a
+  - DbyPaas_iOS/duobei (0.1.0):
+    - DbyPaas_iOS/curl
+    - DbyPaas_iOS/DBAVSync
+    - DbyPaas_iOS/FFmpeg
+    - DbyPaas_iOS/json
+    - DbyPaas_iOS/libopus
+    - DbyPaas_iOS/librtmp
+    - DbyPaas_iOS/libspeexdsp
+    - DbyPaas_iOS/libyuv
+    - DbyPaas_iOS/minizip
+    - DbyPaas_iOS/soundTouch
+    - DbyPaas_iOS/webrtc_3a
+  - DbyPaas_iOS/FFmpeg (0.1.0):
+    - DbyPaas_iOS/libx264
+  - DbyPaas_iOS/google (0.1.0)
+  - DbyPaas_iOS/json (0.1.0)
+  - DbyPaas_iOS/libopus (0.1.0)
+  - DbyPaas_iOS/librtmp (0.1.0):
+    - DbyPaas_iOS/unisocket
+  - DbyPaas_iOS/libspeexdsp (0.1.0)
+  - DbyPaas_iOS/libx264 (0.1.0)
+  - DbyPaas_iOS/libyuv (0.1.0)
+  - DbyPaas_iOS/minizip (0.1.0)
+  - DbyPaas_iOS/soundTouch (0.1.0)
+  - DbyPaas_iOS/unisocket (0.1.0):
+    - DbyPaas_iOS/google
+  - DbyPaas_iOS/webrtc_3a (0.1.0)
+
+DEPENDENCIES:
+  - DbyPaas_iOS (from `~/Projects/compare_agora/dby-paas-ios-sdk/DbyPaas_iOS.podspec`)
+
+EXTERNAL SOURCES:
+  DbyPaas_iOS:
+    :path: "~/Projects/compare_agora/dby-paas-ios-sdk/DbyPaas_iOS.podspec"
+
+SPEC CHECKSUMS:
+  DbyPaas_iOS: 938bf48f368e9e5f506d487a3226e08e490d4e3d
+
+PODFILE CHECKSUM: 2a8bd485af534f84676f96088f3e4e4b6496f58b
+
+COCOAPODS: 1.9.1

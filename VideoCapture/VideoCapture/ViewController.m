@@ -12,8 +12,8 @@
 #import "VideoRecorder.h"
 #import "DBYOpenGLView.h"
 
-
 @interface ViewController () <VideoRecorderDelegate>
+
 @property (weak, nonatomic) IBOutlet VideoPreview *preview;
 @property (nonatomic, strong) VideoRecorder *recorder;
 @property (weak, nonatomic) IBOutlet DBYOpenGLView *openglView;
@@ -24,7 +24,6 @@
 @property (nonatomic, assign) BOOL mirrored;
 
 @property (nonatomic, assign) RotaitonType rotationType;
-
 
 @end
 
@@ -105,5 +104,10 @@
         CVPixelBufferRelease(dstBuffer);
     }
 }
+
+
+
+
+
 
 @end

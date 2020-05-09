@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		811C5BB856AED5836A700C8C /* Pods_VideoCapture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 984A4A2E7F2859068FE5F6B9 /* Pods_VideoCapture.framework */; };
 		86009BCE240E0B6800002207 /* ShaderUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 86009BC9240E0B6800002207 /* ShaderUtilities.c */; };
 		86009BCF240E0B6800002207 /* DBYOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86009BCB240E0B6800002207 /* DBYOpenGLView.m */; };
 		86009BD0240E0B6800002207 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 86009BCC240E0B6800002207 /* matrix.c */; };
 		86009BD3240E0E9600002207 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86009BD2240E0E9600002207 /* OpenGLES.framework */; };
 		8616D09B2355AE4200639630 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D09A2355AE4200639630 /* AppDelegate.m */; };
-		8616D09E2355AE4200639630 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D09D2355AE4200639630 /* SceneDelegate.m */; };
 		8616D0A12355AE4200639630 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D0A02355AE4200639630 /* ViewController.m */; };
 		8616D0A42355AE4200639630 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8616D0A22355AE4200639630 /* Main.storyboard */; };
 		8616D0A62355AE4300639630 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8616D0A52355AE4300639630 /* Assets.xcassets */; };
@@ -74,9 +74,28 @@
 		8616D13A2355BC0A00639630 /* VideoFormatConvertor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8616D1392355BC0A00639630 /* VideoFormatConvertor.mm */; };
 		8616D13D2355BCE600639630 /* PixelBufferPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D13C2355BCE600639630 /* PixelBufferPool.m */; };
 		8678B94B239A340800366913 /* VideoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8678B94A239A340800366913 /* VideoConfig.m */; };
+		86DDBD1E2465018A0045FB43 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DDBD1D2465018A0045FB43 /* LoginController.m */; };
+		86DDBD24246505300045FB43 /* ChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DDBD22246505300045FB43 /* ChatController.m */; };
+		86DDBD25246505300045FB43 /* ChatController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86DDBD23246505300045FB43 /* ChatController.xib */; };
+		86DDBD28246506A70045FB43 /* CustomVideoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DDBD27246506A70045FB43 /* CustomVideoSource.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		86DDBD1B246500750045FB43 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		56C50EA91F644BC8832F7C7C /* Pods-VideoCapture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoCapture.release.xcconfig"; path = "Target Support Files/Pods-VideoCapture/Pods-VideoCapture.release.xcconfig"; sourceTree = "<group>"; };
+		6805B0E294E84B69A1D7ECC3 /* Pods-VideoCapture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoCapture.debug.xcconfig"; path = "Target Support Files/Pods-VideoCapture/Pods-VideoCapture.debug.xcconfig"; sourceTree = "<group>"; };
 		86009BC8240E0B6800002207 /* DBYOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBYOpenGLView.h; sourceTree = "<group>"; };
 		86009BC9240E0B6800002207 /* ShaderUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ShaderUtilities.c; sourceTree = "<group>"; };
 		86009BCA240E0B6800002207 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
@@ -87,8 +106,6 @@
 		8616D0962355AE4200639630 /* VideoCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8616D0992355AE4200639630 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8616D09A2355AE4200639630 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8616D09C2355AE4200639630 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		8616D09D2355AE4200639630 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		8616D09F2355AE4200639630 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8616D0A02355AE4200639630 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8616D0A32355AE4200639630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,6 +195,14 @@
 		8616D13C2355BCE600639630 /* PixelBufferPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PixelBufferPool.m; sourceTree = "<group>"; };
 		8678B949239A340800366913 /* VideoConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoConfig.h; sourceTree = "<group>"; };
 		8678B94A239A340800366913 /* VideoConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoConfig.m; sourceTree = "<group>"; };
+		86DDBD1C2465018A0045FB43 /* LoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		86DDBD1D2465018A0045FB43 /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		86DDBD21246505300045FB43 /* ChatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatController.h; sourceTree = "<group>"; };
+		86DDBD22246505300045FB43 /* ChatController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatController.m; sourceTree = "<group>"; };
+		86DDBD23246505300045FB43 /* ChatController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatController.xib; sourceTree = "<group>"; };
+		86DDBD26246506A70045FB43 /* CustomVideoSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVideoSource.h; sourceTree = "<group>"; };
+		86DDBD27246506A70045FB43 /* CustomVideoSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVideoSource.m; sourceTree = "<group>"; };
+		984A4A2E7F2859068FE5F6B9 /* Pods_VideoCapture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoCapture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,12 +211,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				86009BD3240E0E9600002207 /* OpenGLES.framework in Frameworks */,
+				811C5BB856AED5836A700C8C /* Pods_VideoCapture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E43721298D3A3E42F1FAA8F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6805B0E294E84B69A1D7ECC3 /* Pods-VideoCapture.debug.xcconfig */,
+				56C50EA91F644BC8832F7C7C /* Pods-VideoCapture.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		86009BC7240E0B6800002207 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				86009BD2240E0E9600002207 /* OpenGLES.framework */,
+				984A4A2E7F2859068FE5F6B9 /* Pods_VideoCapture.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,6 +255,7 @@
 				8616D0982355AE4200639630 /* VideoCapture */,
 				8616D0972355AE4200639630 /* Products */,
 				86009BD1240E0E9600002207 /* Frameworks */,
+				4E43721298D3A3E42F1FAA8F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -240,8 +277,13 @@
 				8616D0B22355B1F600639630 /* libyuv */,
 				8616D0992355AE4200639630 /* AppDelegate.h */,
 				8616D09A2355AE4200639630 /* AppDelegate.m */,
-				8616D09C2355AE4200639630 /* SceneDelegate.h */,
-				8616D09D2355AE4200639630 /* SceneDelegate.m */,
+				86DDBD1C2465018A0045FB43 /* LoginController.h */,
+				86DDBD1D2465018A0045FB43 /* LoginController.m */,
+				86DDBD21246505300045FB43 /* ChatController.h */,
+				86DDBD22246505300045FB43 /* ChatController.m */,
+				86DDBD26246506A70045FB43 /* CustomVideoSource.h */,
+				86DDBD27246506A70045FB43 /* CustomVideoSource.m */,
+				86DDBD23246505300045FB43 /* ChatController.xib */,
 				8616D09F2355AE4200639630 /* ViewController.h */,
 				8616D0A02355AE4200639630 /* ViewController.m */,
 				8616D0A22355AE4200639630 /* Main.storyboard */,
@@ -378,9 +420,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8616D0AF2355AE4300639630 /* Build configuration list for PBXNativeTarget "VideoCapture" */;
 			buildPhases = (
+				79F7B8B7061931238C2F7154 /* [CP] Check Pods Manifest.lock */,
 				8616D0922355AE4200639630 /* Sources */,
 				8616D0932355AE4200639630 /* Frameworks */,
 				8616D0942355AE4200639630 /* Resources */,
+				86DDBD1B246500750045FB43 /* Embed Frameworks */,
+				6757CD93BC7AAA38116B82DF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -429,12 +474,53 @@
 			buildActionMask = 2147483647;
 			files = (
 				8616D0A92355AE4300639630 /* LaunchScreen.storyboard in Resources */,
+				86DDBD25246505300045FB43 /* ChatController.xib in Resources */,
 				8616D0A62355AE4300639630 /* Assets.xcassets in Resources */,
 				8616D0A42355AE4200639630 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6757CD93BC7AAA38116B82DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VideoCapture/Pods-VideoCapture-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79F7B8B7061931238C2F7154 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VideoCapture-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8616D0922355AE4200639630 /* Sources */ = {
@@ -456,6 +542,7 @@
 				8616D1192355B1F600639630 /* row_mips.cc in Sources */,
 				8616D1022355B1F600639630 /* convert_jpeg.cc in Sources */,
 				8616D1262355B1F600639630 /* rotate_neon.cc in Sources */,
+				86DDBD24246505300045FB43 /* ChatController.m in Sources */,
 				8616D1092355B1F600639630 /* scale.cc in Sources */,
 				8616D1222355B1F600639630 /* scale_win.cc in Sources */,
 				8616D0FD2355B1F600639630 /* rotate_common.cc in Sources */,
@@ -476,6 +563,7 @@
 				8616D1362355BAF400639630 /* VideoPreview.m in Sources */,
 				8616D1152355B1F600639630 /* rotate_gcc.cc in Sources */,
 				8678B94B239A340800366913 /* VideoConfig.m in Sources */,
+				86DDBD1E2465018A0045FB43 /* LoginController.m in Sources */,
 				8616D11D2355B1F600639630 /* compare_neon.cc in Sources */,
 				8616D1082355B1F600639630 /* rotate_neon64.cc in Sources */,
 				8616D11B2355B1F600639630 /* row_any.cc in Sources */,
@@ -492,7 +580,6 @@
 				8616D1252355B1F600639630 /* scale_neon.cc in Sources */,
 				86009BCF240E0B6800002207 /* DBYOpenGLView.m in Sources */,
 				86009BD0240E0B6800002207 /* matrix.c in Sources */,
-				8616D09E2355AE4200639630 /* SceneDelegate.m in Sources */,
 				8616D1042355B1F600639630 /* cpu_id.cc in Sources */,
 				8616D1032355B1F600639630 /* compare_win.cc in Sources */,
 				8616D1322355B27800639630 /* VideoRecorder.m in Sources */,
@@ -500,6 +587,7 @@
 				8616D11E2355B1F600639630 /* rotate_win.cc in Sources */,
 				8616D10D2355B1F600639630 /* compare_msa.cc in Sources */,
 				8616D0FC2355B1F600639630 /* compare_mmi.cc in Sources */,
+				86DDBD28246506A70045FB43 /* CustomVideoSource.m in Sources */,
 				8616D12D2355B1F600639630 /* compare_neon64.cc in Sources */,
 				8616D10F2355B1F600639630 /* row_msa.cc in Sources */,
 				8616D12E2355B1F600639630 /* scale_argb.cc in Sources */,
@@ -641,10 +729,15 @@
 		};
 		8616D0B02355AE4300639630 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6805B0E294E84B69A1D7ECC3 /* Pods-VideoCapture.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VB8MVMJBU4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VideoCapture",
+				);
 				HEADER_SEARCH_PATHS = $SRCROOT/VideoCapture/libyuv;
 				INFOPLIST_FILE = VideoCapture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -660,10 +753,15 @@
 		};
 		8616D0B12355AE4300639630 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56C50EA91F644BC8832F7C7C /* Pods-VideoCapture.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VB8MVMJBU4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VideoCapture",
+				);
 				HEADER_SEARCH_PATHS = $SRCROOT/VideoCapture/libyuv;
 				INFOPLIST_FILE = VideoCapture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

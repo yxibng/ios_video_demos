@@ -1,0 +1,6 @@
+framework module DbyPaas_iOS {
+  umbrella header "DbyPaas_iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

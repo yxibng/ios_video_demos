@@ -1,0 +1,265 @@
+{
+  "name": "DbyPaas_iOS",
+  "version": "0.1.0",
+  "summary": "A short description of DbyPaas_iOS.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://team.duobeiyun.com/source/dby-paas-ios-sdk/",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "yxibng": "xiaobing.yao@duobei.com"
+  },
+  "source": {
+    "git": "https://team.duobeiyun.com/source/dby-paas-ios-sdk.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "DbyPaas_SDK/**/*.{h,m,mm,c,cc,cpp}",
+  "exclude_files": "DbyPaas_SDK/SDK_Public/DbyPaas_macOS.h",
+  "public_header_files": "DbyPaas_SDK/SDK_Public/**/*.h",
+  "frameworks": "AVFoundation",
+  "pod_target_xcconfig": {
+    "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
+    "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_SDK/**"
+  },
+  "default_subspecs": "duobei",
+  "subspecs": [
+    {
+      "name": "libx264",
+      "source_files": "DbyPaas_Core/third_party_ios/libx264/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/libx264/include/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/libx264/lib/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/libx264/include"
+      }
+    },
+    {
+      "name": "FFmpeg",
+      "source_files": "DbyPaas_Core/third_party_ios/FFmpeg/**/*.{h,hpp,c,cc,cpp}",
+      "exclude_files": "DbyPaas_Core/third_party_ios/FFmpeg/**/log.{h,c}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/FFmpeg/include/**/*.h",
+      "frameworks": [
+        "VideoToolbox",
+        "AVFoundation",
+        "AudioToolbox",
+        "CoreImage",
+        "CoreMedia"
+      ],
+      "libraries": [
+        "z",
+        "bz2",
+        "iconv"
+      ],
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/FFmpeg/lib/**/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/FFmpeg/include"
+      },
+      "dependencies": {
+        "DbyPaas_iOS/libx264": [
+
+        ]
+      }
+    },
+    {
+      "name": "google",
+      "private_header_files": "DbyPaas_Core/third_party_ios/google/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/google/**/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/google"
+      }
+    },
+    {
+      "name": "unisocket",
+      "source_files": "DbyPaas_Core/third_party_ios/unisocket/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/unisocket/include/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/unisocket/lib/*.a",
+      "libraries": [
+        "z",
+        "c++"
+      ],
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/unisocket/include"
+      },
+      "dependencies": {
+        "DbyPaas_iOS/google": [
+
+        ]
+      }
+    },
+    {
+      "name": "librtmp",
+      "source_files": "DbyPaas_Core/third_party_ios/librtmp/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/librtmp/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/librtmp/**/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "CLANG_CXX_LIBRARY": "libc++",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/librtmp"
+      },
+      "dependencies": {
+        "DbyPaas_iOS/unisocket": [
+
+        ]
+      }
+    },
+    {
+      "name": "curl",
+      "source_files": "DbyPaas_Core/third_party_ios/curl/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/curl/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/curl/**/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/curl"
+      }
+    },
+    {
+      "name": "json",
+      "source_files": "DbyPaas_Core/third_party_ios/json/**/*.{h,hpp,c,cc,cpp}",
+      "exclude_files": "DbyPaas_Core/third_party_ios/json/json/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/json/msinttypes/**/*",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/json/**/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/json"
+      }
+    },
+    {
+      "name": "minizip",
+      "source_files": "DbyPaas_Core/third_party_ios/minizip/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/minizip/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/minizip/**/*.a",
+      "libraries": [
+        "z",
+        "iconv"
+      ],
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/minizip"
+      }
+    },
+    {
+      "name": "libopus",
+      "source_files": "DbyPaas_Core/third_party_ios/libopus/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/libopus/include/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/libopus/lib/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/libopus/include"
+      }
+    },
+    {
+      "name": "libspeexdsp",
+      "source_files": "DbyPaas_Core/third_party_ios/libspeexdsp/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/libspeexdsp/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/libspeexdsp/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/libspeexdsp"
+      }
+    },
+    {
+      "name": "libyuv",
+      "source_files": "DbyPaas_Core/third_party_ios/libyuv/**/*.{h,hpp,c,cc,cpp}",
+      "exclude_files": "DbyPaas_Core/third_party_ios/libyuv/**/version.h",
+      "private_header_files": "DbyPaas_Core/third_party_ios/libyuv/**/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/libyuv/**/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/libyuv"
+      }
+    },
+    {
+      "name": "soundTouch",
+      "source_files": "DbyPaas_Core/third_party_ios/soundTouch/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/soundTouch/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/soundTouch/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/soundTouch"
+      }
+    },
+    {
+      "name": "webrtc_3a",
+      "source_files": "DbyPaas_Core/third_party_ios/webrtc_3a/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/webrtc_3a/include/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/webrtc_3a/lib/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/webrtc_3a/include"
+      }
+    },
+    {
+      "name": "DBAVSync",
+      "source_files": "DbyPaas_Core/third_party_ios/DBAVSync/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/third_party_ios/DBAVSync/*.h",
+      "vendored_libraries": "DbyPaas_Core/third_party_ios/DBAVSync/*.a",
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/third_party_ios/DBAVSync"
+      },
+      "dependencies": {
+        "DbyPaas_iOS/webrtc_3a": [
+
+        ]
+      }
+    },
+    {
+      "name": "duobei",
+      "source_files": "DbyPaas_Core/duobei/**/*.{h,hpp,c,cc,cpp}",
+      "private_header_files": "DbyPaas_Core/duobei/**/*.{h,hpp}",
+      "vendored_libraries": "DbyPaas_Core/duobei/**/*.a",
+      "dependencies": {
+        "DbyPaas_iOS/FFmpeg": [
+
+        ],
+        "DbyPaas_iOS/curl": [
+
+        ],
+        "DbyPaas_iOS/json": [
+
+        ],
+        "DbyPaas_iOS/librtmp": [
+
+        ],
+        "DbyPaas_iOS/minizip": [
+
+        ],
+        "DbyPaas_iOS/libopus": [
+
+        ],
+        "DbyPaas_iOS/libspeexdsp": [
+
+        ],
+        "DbyPaas_iOS/libyuv": [
+
+        ],
+        "DbyPaas_iOS/soundTouch": [
+
+        ],
+        "DbyPaas_iOS/webrtc_3a": [
+
+        ],
+        "DbyPaas_iOS/DBAVSync": [
+
+        ]
+      },
+      "pod_target_xcconfig": {
+        "USE_HEADERMAP": "NO",
+        "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
+        "GCC_PREPROCESSOR_DEFINITIONS": "IOS=1 RTMP_SUPPORT_UNISOCKET=1 kIosPlatformForArt=1 ST_NO_EXCEPTION_HANDLING=1 IOS_LOG USE_P2P",
+        "CLANG_CXX_LANGUAGE_STANDARD": "gnu++17",
+        "CLANG_CXX_LIBRARY": "libc++",
+        "OTHER_CPLUSPLUSFLAGS": "-fno-aligned-allocation -femulated-tls -fno-exceptions",
+        "HEADER_SEARCH_PATHS": "$(PODS_TARGET_SRCROOT)/DbyPaas_Core/duobei"
+      }
+    }
+  ]
+}
