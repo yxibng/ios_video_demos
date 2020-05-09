@@ -103,6 +103,13 @@ typedef struct {
  */
 + (CVPixelBufferRef)sacleI420:(CVPixelBufferRef)pixelBuffer dstWidth:(int)dstWidth dstHeight:(int)dstHeight;
 
+
+
++ (int)scaleI420:(RawData_i420 *)i420Buffer dstI420Buffer:(RawData_i420 *)dstI420Buffer dstWidth:(int)dstWidth dstHeight:(int)dstHeight;
++ (int)rotateI420:(RawData_i420 *)i420Buffer dstI420Buffer:(RawData_i420 *)dstI420Buffer rotationType:(RotaitonType)rotationType;
++ (int)mirrorI420:(RawData_i420 *)i420Buffer dstI420Buffer:(RawData_i420 *)dstI420Buffer;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
